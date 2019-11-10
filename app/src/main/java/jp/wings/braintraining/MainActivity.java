@@ -16,6 +16,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     TextView textView;
     TextView judgeView;
+    TextView ptView;
     Button button;
     Button option1;
     Button option2;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.textview);
         judgeView = (TextView) findViewById(R.id.judgeview);
+        ptView = (TextView) findViewById(R.id.ptview);
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(buttonListener);
         option1 = (Button)findViewById(R.id.option_1);
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     int opt4;
     int cnt=0;
     int result;
-    int pt;
+    int pt=0;
 
     View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
@@ -147,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
             if(result==answer){
                 judgeView.setText("正解");
                 pt=pt+1;
+                ptView.setText(String.valueOf(pt)+"ポイント");
             }else{
                 judgeView.setText("不正解");
             }
