@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.os.CountDownTimer;
 
 import java.util.Random;
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     TextView judgeView;
     TextView ptView;
+    TextView timeView;
     Button button;
     Button option1;
     Button option2;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     int value_opt2;
     int value_opt3;
     int value_opt4;
+    final long START_TIME = 30000;
+    long mTimeLeftInMillis = START_TIME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.textview);
         judgeView = (TextView) findViewById(R.id.judgeview);
+        timeView=(TextView) findViewById(R.id.timeview);
         ptView = (TextView) findViewById(R.id.ptview);
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(buttonListener);
@@ -50,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         option4 = (Button)findViewById(R.id.option_4);
         option4.setOnClickListener(buttonOptListener_4);
 
-
         //TextView textView = (TextView) findViewById(R.id.textview);
         //textView.setText("GoodMorning!!Android!!");
         //textView.setText(String.valueOf(43*21));
@@ -65,53 +69,78 @@ public class MainActivity extends AppCompatActivity {
     int cnt=0;
     int result;
     int pt=0;
+    boolean timerRunning=false;
 
     View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            init();
-        }
+            if (timerRunning == false) {
+                init();
+                pt=0;
+                CountDownTimer countDownTimer = new CountDownTimer(30000, 100) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        int time = (int) millisUntilFinished / 1000;
+                        timeView.setText(time + "秒");
+                        timerRunning = true;
+                    }
 
+                    @Override
+                    public void onFinish() {
+                        timeView.setText("終了");
+                        timerRunning = false;
+                    }
+                }.start();
+            }
+        }
     };
 
 
     View.OnClickListener buttonOptListener_1 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Button button=(Button) view;
-            int value;
-            value = Integer.parseInt(option1.getText().toString());
-            check(value);
+            if(timerRunning == true) {
+                Button button = (Button) view;
+                int value;
+                value = Integer.parseInt(option1.getText().toString());
+                check(value);
+            }
         }
     };
 
     View.OnClickListener buttonOptListener_2 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Button button=(Button) view;
-            int value;
-            value = Integer.parseInt(option2.getText().toString());
-            check(value);
+            if(timerRunning == true) {
+                Button button = (Button) view;
+                int value;
+                value = Integer.parseInt(option2.getText().toString());
+                check(value);
+            }
         }
     };
 
     View.OnClickListener buttonOptListener_3 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Button button=(Button) view;
-            int value;
-            value = Integer.parseInt(option3.getText().toString());
-            check(value);
+            if(timerRunning == true) {
+                Button button = (Button) view;
+                int value;
+                value = Integer.parseInt(option3.getText().toString());
+                check(value);
+            }
         }
     };
 
     View.OnClickListener buttonOptListener_4 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Button button=(Button) view;
-            int value;
-            value = Integer.parseInt(option4.getText().toString());
-            check(value);
+            if(timerRunning == true) {
+                Button button = (Button) view;
+                int value;
+                value = Integer.parseInt(option4.getText().toString());
+                check(value);
+            }
         }
     };
 
