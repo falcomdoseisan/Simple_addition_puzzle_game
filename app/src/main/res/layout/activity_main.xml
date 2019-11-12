@@ -71,7 +71,17 @@
         android:layout_alignParentStart="true"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text=""
+        android:text="Startボタンを押してください"
         android:textSize="38sp"
         android:textStyle="bold" />
+<!--
+    <VideoView
+        android:id="@+id/video"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="0dp"
+        tools:context=".MainActivity" />
+-->
 </RelativeLayout>

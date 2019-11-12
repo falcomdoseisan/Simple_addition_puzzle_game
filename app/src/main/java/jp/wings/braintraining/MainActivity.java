@@ -9,7 +9,11 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.os.CountDownTimer;
-
+import android.widget.VideoView;
+import android.net.Uri;
+import android.widget.MediaController;
+import android.media.MediaPlayer;
+import android.widget.VideoView;
 import java.util.Random;
 
 
@@ -19,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     TextView judgeView;
     TextView ptView;
     TextView timeView;
+    VideoView videoView;
     Button button;
     Button option1;
     Button option2;
@@ -43,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(buttonListener);
         option1 = (Button)findViewById(R.id.option_1);
+//        videoView = (VideoView) findViewById(R.id.video);
+
 
 
         //value_opt1 = Integer.parseInt(option1.getText().toString());
@@ -77,7 +84,12 @@ public class MainActivity extends AppCompatActivity {
             if (timerRunning == false) {
                 init();
                 pt=0;
-                CountDownTimer countDownTimer = new CountDownTimer(30000, 100) {
+                judgeView.setText("入力中");
+                //videoView.setVideoPath("C:\\Users\\ueshi\\Desktop\\プログラミング\\Java\\脳トレ\\素材\\321.");
+                //videoView.setVideoPath("C:\\Users\\ueshi\\Videos\\321.3gp");
+ //               videoView.setVideoPath(Environment.getExternalStorageDirectory().toString() + "");
+ //               videoView.start();
+                CountDownTimer countDownTimer = new CountDownTimer(30000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         int time = (int) millisUntilFinished / 1000;
@@ -173,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
         result = result + val;
         if(cnt==0){
             cnt= cnt+1;
-            judgeView.setText("入力中");
         }else if(cnt==1){
             if(result==answer){
                 judgeView.setText("正解");
