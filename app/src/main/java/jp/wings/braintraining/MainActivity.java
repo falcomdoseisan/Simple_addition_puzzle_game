@@ -1,5 +1,6 @@
 package jp.wings.braintraining;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -48,11 +49,6 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(buttonListener);
         option1 = (Button)findViewById(R.id.option_1);
-//        videoView = (VideoView) findViewById(R.id.video);
-
-
-
-        //value_opt1 = Integer.parseInt(option1.getText().toString());
         option1.setOnClickListener(buttonOptListener_1);
         option2 = (Button)findViewById(R.id.option_2);
         //value_opt2 = Integer.parseInt()
@@ -84,23 +80,29 @@ public class MainActivity extends AppCompatActivity {
             if (timerRunning == false) {
                 init();
                 pt=0;
-                judgeView.setText("入力中");
+                judgeView.setText("にゅうりょくちゅう");
                 //videoView.setVideoPath("C:\\Users\\ueshi\\Desktop\\プログラミング\\Java\\脳トレ\\素材\\321.");
                 //videoView.setVideoPath("C:\\Users\\ueshi\\Videos\\321.3gp");
  //               videoView.setVideoPath(Environment.getExternalStorageDirectory().toString() + "");
  //               videoView.start();
+                //カウントダウンタイマー
                 CountDownTimer countDownTimer = new CountDownTimer(30000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         int time = (int) millisUntilFinished / 1000;
-                        timeView.setText(time + "秒");
+                        timeView.setText(time + "びょう");
                         timerRunning = true;
                     }
 
                     @Override
                     public void onFinish() {
-                        timeView.setText("終了");
+                        timeView.setText("しゅうりょう！！");
                         timerRunning = false;
+                        //Screen transition
+                        Intent intentResult = new Intent(getApplicationContext(), ResultActivity.class);
+                        //RIGHT_ANSWER_COUNTをキーにして,ptをResultActivityに渡す
+                        intentResult.putExtra("RIGHT_ANSWER_COUNT", pt);
+                        startActivity(intentResult);
                     }
                 }.start();
             }
@@ -185,19 +187,20 @@ public class MainActivity extends AppCompatActivity {
         result = result + val;
         if(cnt==0){
             cnt= cnt+1;
+            judgeView.setText("にゅうりょくちゅう");
         }else if(cnt==1){
             if(result==answer){
-                judgeView.setText("正解");
+                judgeView.setText("せいかい！！！");
                 pt=pt+1;
                 ptView.setText(String.valueOf(pt)+"ポイント");
             }else{
-                judgeView.setText("不正解");
+                judgeView.setText("ふせいかい...");
             }
             result = 0;
             cnt=0;
             init();
         }else{
-            judgeView.setText("Unexpected error!!!");
+            judgeView.setText("よきしないエラーです。アプリかいはつしゃにれんらくしてください。");
         }
     }
 }
