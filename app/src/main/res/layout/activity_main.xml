@@ -36,7 +36,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:text="*"
-        android:textSize="120sp"
+        android:textSize="100sp"
         android:textStyle="bold" />
     <!--
     app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +51,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:text="スタート" />
+        android:text="スタート"
+        android:textSize="24sp" />
 
     <include
         android:id="@+id/option"
@@ -67,12 +68,12 @@
         android:id="@+id/judgeview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/option"
+        android:layout_above="@+id/button"
         android:layout_alignParentStart="true"
         android:layout_gravity="center"
         android:gravity="center"
         android:text="スタートボタンをおしてね"
-        android:textSize="38sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 <!--
     <VideoView

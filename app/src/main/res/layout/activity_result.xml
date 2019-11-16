@@ -36,10 +36,10 @@
 
     <Button
         android:id="@+id/topbutton"
-        android:layout_width="252dp"
-        android:layout_height="83dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="もういちどちょうせんする"
-        android:textSize="26sp" />
+        android:text="もういちど\nちょうせんする"
+        android:textSize="24sp" />
 
 </LinearLayout>
