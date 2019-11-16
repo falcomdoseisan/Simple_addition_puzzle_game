@@ -23,15 +23,16 @@
         android:textSize="30sp"
         android:layout_marginTop="60dp"/>
 
-    <!--
+
     <TextView
-        android:id="@+id/totalScoreLabel"
+        android:id="@+id/highScoreview"
+        android:layout_below="@id/resultview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="トータルスコア : 333"
-        android:textSize="20sp"
-        android:layout_marginTop="60dp"/>
-    -->
+        android:text="ハイスコア : 333"
+        android:textSize="30sp"
+        android:layout_marginTop="60dp"
+        />
 
     <Button
         android:id="@+id/topbutton"
