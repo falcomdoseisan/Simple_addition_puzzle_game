@@ -3,6 +3,7 @@ package jp.wings.braintraining;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,18 +11,28 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
+    TextView titleView;
     TextView resultView;
     Button topButton;
     TextView highScoreView;
+    Typeface customFont;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
+        customFont = Typeface.createFromAsset(getAssets(), "KodomoRounded.otf");
+
+        titleView = (TextView)findViewById(R.id.tileview);
+        titleView.setTypeface(customFont);
         resultView = (TextView)findViewById(R.id.resultview);
+        resultView.setTypeface(customFont);
         highScoreView = (TextView)findViewById(R.id.highScoreview);
+        highScoreView.setTypeface(customFont);
         topButton = (Button)findViewById(R.id.topbutton);
+        topButton.setTypeface(customFont);
         topButton.setOnClickListener(topButtonListener);
 
         //RIGHT_ANSWER_COUNTをキーにしてMainActivityから値を取得、取得できなかった場合は0を取得

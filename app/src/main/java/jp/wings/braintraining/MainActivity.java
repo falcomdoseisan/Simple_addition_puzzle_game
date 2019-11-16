@@ -1,6 +1,8 @@
 package jp.wings.braintraining;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     TextView judgeView;
     TextView ptView;
     TextView timeView;
+    Typeface customFont;
     VideoView videoView;
     Button button;
     Button option1;
@@ -42,20 +45,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //font設定
+        customFont = Typeface.createFromAsset(getAssets(), "KodomoRounded.otf");
+
         textView = (TextView) findViewById(R.id.textview);
+        textView.setTypeface(customFont);
         judgeView = (TextView) findViewById(R.id.judgeview);
+        judgeView.setTypeface(customFont);
         timeView=(TextView) findViewById(R.id.timeview);
+        timeView.setTypeface(customFont);
         ptView = (TextView) findViewById(R.id.ptview);
+        ptView.setTypeface(customFont);
         button = (Button) findViewById(R.id.button);
+        button.setTypeface(customFont);
         button.setOnClickListener(buttonListener);
         option1 = (Button)findViewById(R.id.option_1);
+        option1.setTypeface(customFont);
         option1.setOnClickListener(buttonOptListener_1);
         option2 = (Button)findViewById(R.id.option_2);
-        //value_opt2 = Integer.parseInt()
+        option2.setTypeface(customFont);
         option2.setOnClickListener(buttonOptListener_2);
         option3 = (Button)findViewById(R.id.option_3);
+        option3.setTypeface(customFont);
         option3.setOnClickListener(buttonOptListener_3);
         option4 = (Button)findViewById(R.id.option_4);
+        option4.setTypeface(customFont);
         option4.setOnClickListener(buttonOptListener_4);
 
         //TextView textView = (TextView) findViewById(R.id.textview);
@@ -97,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFinish() {
                         timeView.setText("しゅうりょう！！");
+                        judgeView.setText("おつかれさま");
+                        judgeView.setTextColor(Color.rgb(255,255,255));
                         timerRunning = false;
                         //Screen transition
                         Intent intentResult = new Intent(getApplicationContext(), ResultActivity.class);
@@ -188,19 +204,25 @@ public class MainActivity extends AppCompatActivity {
         if(cnt==0){
             cnt= cnt+1;
             judgeView.setText("にゅうりょくちゅう");
+            judgeView.setTextColor(Color.rgb(255,255,255));
         }else if(cnt==1){
             if(result==answer){
                 judgeView.setText("せいかい！！！");
+                //#99EE99
+                judgeView.setTextColor(Color.rgb(153, 238, 153));
                 pt=pt+1;
                 ptView.setText(String.valueOf(pt)+"ポイント");
             }else{
                 judgeView.setText("ふせいかい...");
+                //#FFBBFF
+                judgeView.setTextColor(Color.rgb(255,187,255));
             }
             result = 0;
             cnt=0;
             init();
         }else{
             judgeView.setText("よきしないエラーです。アプリかいはつしゃにれんらくしてください。");
+            judgeView.setTextColor(Color.rgb(255,255,255));
         }
     }
 }
