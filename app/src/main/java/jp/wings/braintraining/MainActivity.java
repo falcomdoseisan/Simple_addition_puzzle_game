@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
     int cnt=0;
     int result;
     int pt=0;
+    int ope1;
+    int ope2;
     boolean timerRunning=false;
 
     View.OnClickListener buttonListener = new View.OnClickListener() {
@@ -94,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
             if (timerRunning == false) {
                 init();
                 pt=0;
-                judgeView.setText("にゅうりょくちゅう");
+                //judgeView.setText("にゅうりょくちゅう");
+                judgeView.setText(" + ="+String.valueOf(answer));
                 //videoView.setVideoPath("C:\\Users\\ueshi\\Desktop\\プログラミング\\Java\\脳トレ\\素材\\321.");
                 //videoView.setVideoPath("C:\\Users\\ueshi\\Videos\\321.3gp");
  //               videoView.setVideoPath(Environment.getExternalStorageDirectory().toString() + "");
@@ -203,17 +206,20 @@ public class MainActivity extends AppCompatActivity {
         result = result + val;
         if(cnt==0){
             cnt= cnt+1;
-            judgeView.setText("にゅうりょくちゅう");
+            ope1 = val;
+            //judgeView.setText("にゅうりょくちゅう");
+            judgeView.setText(String.valueOf(ope1)+"+ ="+String.valueOf(answer));
             judgeView.setTextColor(Color.rgb(255,255,255));
         }else if(cnt==1){
+            ope2 = val;
             if(result==answer){
-                judgeView.setText("せいかい！！！");
+                judgeView.setText(String.valueOf(ope1)+"+"+String.valueOf(ope2)+"="+String.valueOf(answer)+"\nせいかい！！！");
                 //#99EE99
                 judgeView.setTextColor(Color.rgb(153, 238, 153));
                 pt=pt+1;
                 ptView.setText(String.valueOf(pt)+"ポイント");
             }else{
-                judgeView.setText("ふせいかい...");
+                judgeView.setText(String.valueOf(ope1)+"+"+String.valueOf(ope2)+"="+String.valueOf(answer)+"\nふせいかい...");
                 //#FFBBFF
                 judgeView.setTextColor(Color.rgb(255,187,255));
             }
