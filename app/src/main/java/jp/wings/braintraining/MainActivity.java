@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
             result = 0;
             cnt=0;
         }else{
-            judgeView.setText("よきしないエラーです。アプリかいはつしゃにれんらくしてください。");
+            judgeView.setText("よきせぬエラーです。アプリかいはつしゃにれんらくしてください。");
             judgeView.setTextColor(Color.rgb(255,255,255));
         }
     }
