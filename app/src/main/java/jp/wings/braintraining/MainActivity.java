@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     int answer;
+    int answer_before;
+
     int opt1;
     int opt2;
     int opt3;
@@ -90,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
     int ope2;
     boolean timerRunning=false;
 
+
+    // タイマー設定
     View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -177,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    // 初期設定（答えと選択肢の設定）
     public void init() {
         answer = (int) (Math.random() * 11);
         while(answer !=opt1+opt2){
@@ -211,21 +216,23 @@ public class MainActivity extends AppCompatActivity {
             judgeView.setText(String.valueOf(ope1)+"+ ="+String.valueOf(answer));
             judgeView.setTextColor(Color.rgb(255,255,255));
         }else if(cnt==1){
+            answer_before = answer;
+            init();
             ope2 = val;
-            if(result==answer){
-                judgeView.setText(String.valueOf(ope1)+"+"+String.valueOf(ope2)+"="+String.valueOf(answer)+"\nせいかい！！！");
+            if(result==answer_before){
+                judgeView.setText(String.valueOf(ope1)+"+"+String.valueOf(ope2)+"="+String.valueOf(answer_before)+"\nせいかい！！！\n"+" + ="+String.valueOf(answer));
                 //#99EE99
                 judgeView.setTextColor(Color.rgb(153, 238, 153));
+                //judgeView.setText(Html.fromHtml(String.valueOf(ope1))
                 pt=pt+1;
                 ptView.setText(String.valueOf(pt)+"ポイント");
             }else{
-                judgeView.setText(String.valueOf(ope1)+"+"+String.valueOf(ope2)+"="+String.valueOf(answer)+"\nふせいかい...");
+                judgeView.setText(String.valueOf(ope1)+"+"+String.valueOf(ope2)+"="+String.valueOf(answer_before)+"\nふせいかい...\n"+" + ="+String.valueOf(answer));
                 //#FFBBFF
                 judgeView.setTextColor(Color.rgb(255,187,255));
             }
             result = 0;
             cnt=0;
-            init();
         }else{
             judgeView.setText("よきしないエラーです。アプリかいはつしゃにれんらくしてください。");
             judgeView.setTextColor(Color.rgb(255,255,255));
