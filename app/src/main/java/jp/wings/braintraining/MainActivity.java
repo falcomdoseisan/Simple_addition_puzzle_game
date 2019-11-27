@@ -20,34 +20,42 @@ import android.widget.VideoView;
 import java.util.Random;
 
 
-
 public class MainActivity extends AppCompatActivity {
+    //Variables initialization
     TextView textView;
     TextView judgeView;
     TextView ptView;
     TextView timeView;
     Typeface customFont;
-    VideoView videoView;
     Button button;
     Button option1;
     Button option2;
     Button option3;
     Button option4;
-    int value_opt1;
-    int value_opt2;
-    int value_opt3;
-    int value_opt4;
     final long START_TIME = 30000;
-    long mTimeLeftInMillis = START_TIME;
+    int answer;
+    int answer_before;
+
+    int opt1;
+    int opt2;
+    int opt3;
+    int opt4;
+    int cnt=0;
+    int result;
+    int pt=0;
+    int ope1;
+    int ope2;
+    boolean timerRunning=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //font設定
+        //font setting
         customFont = Typeface.createFromAsset(getAssets(), "KodomoRounded.otf");
 
+        //text setting
         textView = (TextView) findViewById(R.id.textview);
         textView.setTypeface(customFont);
         judgeView = (TextView) findViewById(R.id.judgeview);
@@ -56,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         timeView.setTypeface(customFont);
         ptView = (TextView) findViewById(R.id.ptview);
         ptView.setTypeface(customFont);
+
+        //button setting
         button = (Button) findViewById(R.id.button);
         button.setTypeface(customFont);
         button.setOnClickListener(buttonListener);
@@ -71,26 +81,10 @@ public class MainActivity extends AppCompatActivity {
         option4 = (Button)findViewById(R.id.option_4);
         option4.setTypeface(customFont);
         option4.setOnClickListener(buttonOptListener_4);
-
-        //TextView textView = (TextView) findViewById(R.id.textview);
-        //textView.setText("GoodMorning!!Android!!");
-        //textView.setText(String.valueOf(43*21));
     }
 
 
-    int answer;
-    int answer_before;
 
-    int opt1;
-    int opt2;
-    int opt3;
-    int opt4;
-    int cnt=0;
-    int result;
-    int pt=0;
-    int ope1;
-    int ope2;
-    boolean timerRunning=false;
 
 
     // タイマー設定
@@ -100,15 +94,11 @@ public class MainActivity extends AppCompatActivity {
             if (timerRunning == false) {
                 init();
                 pt=0;
-                //judgeView.setText("にゅうりょくちゅう");
                 judgeView.setText(" + ="+String.valueOf(answer));
-                //videoView.setVideoPath("C:\\Users\\ueshi\\Desktop\\プログラミング\\Java\\脳トレ\\素材\\321.");
-                //videoView.setVideoPath("C:\\Users\\ueshi\\Videos\\321.3gp");
- //               videoView.setVideoPath(Environment.getExternalStorageDirectory().toString() + "");
- //               videoView.start();
-                //カウントダウンタイマー
-                CountDownTimer countDownTimer = new CountDownTimer(30000, 1000) {
+                //カウントダウンタイマー(30s,1sごと)
+                CountDownTimer countDownTimer = new CountDownTimer(START_TIME, 1000) {
                     @Override
+                    //秒数表示
                     public void onTick(long millisUntilFinished) {
                         int time = (int) millisUntilFinished / 1000;
                         timeView.setText(time + "びょう");
@@ -116,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
+                    //カウントダウンタイマー終了時の処理
                     public void onFinish() {
                         timeView.setText("しゅうりょう！！");
                         judgeView.setText("おつかれさま");
@@ -132,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-
+    //optionボタンを押した際カウントダウンタイマーを押したらcheck(value)メソッドを実行する
     View.OnClickListener buttonOptListener_1 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -200,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
             optArray[r] = tmp;
         }
 
+        //答えとオプションボタンの設定
         textView.setText(String.valueOf(answer));
         option1.setText(String.valueOf(optArray[0]));
         option2.setText(String.valueOf(optArray[1]));
@@ -207,33 +199,33 @@ public class MainActivity extends AppCompatActivity {
         option4.setText(String.valueOf(optArray[3]));
     }
 
+    //optionボタンを選択した際に動作するメソッド
     public void check(int val){
         result = result + val;
-        if(cnt==0){
+        if(cnt==0){  //optionボタンの1回目の選択
             cnt= cnt+1;
             ope1 = val;
             //judgeView.setText("にゅうりょくちゅう");
             judgeView.setText(String.valueOf(ope1)+"+ ="+String.valueOf(answer));
             judgeView.setTextColor(Color.rgb(255,255,255));
-        }else if(cnt==1){
+        }else if(cnt==1){  //optionボタンの2回目の選択
             answer_before = answer;
             init();
             ope2 = val;
-            if(result==answer_before){
+            if(result==answer_before){  //正解の時
                 judgeView.setText(String.valueOf(ope1)+"+"+String.valueOf(ope2)+"="+String.valueOf(answer_before)+"\nせいかい！！！\n"+" + ="+String.valueOf(answer));
                 //#99EE99
                 judgeView.setTextColor(Color.rgb(153, 238, 153));
-                //judgeView.setText(Html.fromHtml(String.valueOf(ope1))
                 pt=pt+1;
                 ptView.setText(String.valueOf(pt)+"ポイント");
-            }else{
+            }else{  //不正解の時
                 judgeView.setText(String.valueOf(ope1)+"+"+String.valueOf(ope2)+"="+String.valueOf(answer_before)+"\nふせいかい...\n"+" + ="+String.valueOf(answer));
                 //#FFBBFF
                 judgeView.setTextColor(Color.rgb(255,187,255));
             }
             result = 0;
             cnt=0;
-        }else{
+        }else{  //例外が生じた際
             judgeView.setText("よきせぬエラーです。アプリかいはつしゃにれんらくしてください。");
             judgeView.setTextColor(Color.rgb(255,255,255));
         }
